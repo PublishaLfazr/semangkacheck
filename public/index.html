@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SemangkaCheck AI</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍉</text></svg>" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="logo-circle">🍉</div>
+      <div class="header-text">
+        <h1>SemangkaCheck AI</h1>
+        <p>Deteksi kematangan, kesegaran &amp; kemanisan semangka</p>
+      </div>
+      <div class="badge-free">GRATIS</div>
+    </header>
+
+    <main class="main">
+      <!-- TIPS PILIH SEMANGKA -->
+      <div class="tips-banner" id="tipsBanner">
+        <div class="tips-banner-header" onclick="toggleTips()">
+          <span>💡 Tips Memilih Semangka Segar</span>
+          <span class="tips-toggle-icon" id="tipsIcon">▸</span>
+        </div>
+        <div class="tips-content" id="tipsContent" style="display:none;">
+          <ul>
+            <li>🟢 Kulit hijau tua dengan garis putih kontras = tanda matang</li>
+            <li>🟡 Ada bercak kuning di bagian bawah = matang di pohon</li>
+            <li>🔊 Suara "tuk tuk" saat diketuk = berair dan segar</li>
+            <li>⚖️ Pilih yang berat untuk ukurannya = kandungan air tinggi</li>
+            <li>🔵 Tangkai kering dan mengkerut = dipetik saat matang</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- UPLOAD -->
+      <div class="upload-zone" id="uploadZone">
+        <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" />
+        <div class="upload-icon">📷</div>
+        <h2>Upload atau ambil foto semangka</h2>
+        <p>JPG, PNG, WEBP · maks 10MB</p>
+      </div>
+
+      <div class="preview-box" id="previewBox">
+        <img id="previewImg" src="" alt="Preview semangka" />
+        <span class="preview-label">Gambar terpilih</span>
+      </div>
+
+      <div class="error-box" id="errorBox"></div>
+
+      <div class="loading-bar" id="loadingBar">
+        <div class="loading-bar-fill"></div>
+      </div>
+
+      <div id="statusSteps">
+        <span id="statusText">Memproses...</span>
+        <div class="step-dots">
+          <div class="step-dot" id="dot1"></div>
+          <div class="step-dot" id="dot2"></div>
+          <div class="step-dot" id="dot3"></div>
+        </div>
+      </div>
+
+      <button class="btn-analyze" id="btnAnalyze" disabled>
+        <i class="ti ti-scan" aria-hidden="true"></i>
+        Analisis Semangka
+      </button>
+
+      <!-- HASIL -->
+      <section class="results" id="results" aria-live="polite">
+        <p class="section-label">Hasil Analisis</p>
+
+        <div class="result-grid">
+          <div class="result-card">
+            <div class="label">Tingkat Kematangan</div>
+            <div class="value" id="ripePct">—</div>
+            <div class="sublabel">
+              <span class="ripeness-badge" id="ripeLabel">—</span>
+            </div>
+          </div>
+          <div class="result-card">
+            <div class="label">Tingkat Kebusukan</div>
+            <div class="value" id="rotPct">—</div>
+            <div class="sublabel" id="rotLabel">—</div>
+          </div>
+        </div>
+
+        <!-- KARTU FITUR BARU: KEMANISAN & WARNA -->
+        <div class="result-grid result-grid-extra">
+          <div class="result-card result-card-sweet">
+            <div class="label">🍬 Estimasi Kemanisan</div>
+            <div class="value-sweet" id="sweetnessVal">—</div>
+          </div>
+          <div class="result-card result-card-color">
+            <div class="label">🎨 Skor Warna</div>
+            <div class="value" id="colorScore">—</div>
+          </div>
+        </div>
+
+        <p class="section-label">Distribusi Persentase</p>
+
+        <div class="meter-row">
+          <div class="meter-header">
+            <span class="meter-name">Kematangan</span>
+            <span class="meter-pct" id="meterRipePct">0%</span>
+          </div>
+          <div class="meter-bg"><div class="meter-fill fill-matang" id="meterRipe"></div></div>
+        </div>
+
+        <div class="meter-row">
+          <div class="meter-header">
+            <span class="meter-name">Kebusukan</span>
+            <span class="meter-pct" id="meterRotPct">0%</span>
+          </div>
+          <div class="meter-bg"><div class="meter-fill fill-busuk" id="meterRot"></div></div>
+        </div>
+
+        <div class="meter-row">
+          <div class="meter-header">
+            <span class="meter-name">Skor Warna</span>
+            <span class="meter-pct" id="meterColorPct">0%</span>
+          </div>
+          <div class="meter-bg"><div class="meter-fill fill-warna" id="meterColor"></div></div>
+        </div>
+
+        <div class="meter-row">
+          <div class="meter-header">
+            <span class="meter-name">Akurasi AI</span>
+            <span class="meter-pct" id="meterAccPct">0%</span>
+          </div>
+          <div class="meter-bg"><div class="meter-fill fill-akurasi" id="meterAcc"></div></div>
+        </div>
+
+        <div class="analysis-box">
+          <div class="ai-label">
+            <div class="ai-dot"></div>
+            Analisis Dari Kami
+          </div>
+          <p id="analysisText">—</p>
+          <div class="tip-box" id="tipBox">
+            <p id="tipText"></p>
+          </div>
+        </div>
+
+        <!-- Tombol aksi hasil -->
+        <div class="result-actions">
+          <button class="btn-share" id="btnShare">
+            <i class="ti ti-share" aria-hidden="true"></i>
+            Bagikan
+          </button>
+          <button class="btn-reset" id="btnReset">
+            <i class="ti ti-refresh" aria-hidden="true"></i>
+            Analisis Ulang
+          </button>
+        </div>
+      </section>
+
+      <!-- COMPARE -->
+      <section id="compareSection" style="display:none; margin-top:2rem;">
+        <div class="compare-title-row">
+          <p class="section-label" style="margin:0;">⚖️ Bandingkan Semangka</p>
+          <button class="btn-clear-history" onclick="closeCompare()">Tutup</button>
+        </div>
+        <p style="font-size:.8rem; color:var(--text-muted); margin-bottom:.75rem;">
+          Pilih 2 riwayat dengan tombol ⚖️ untuk membandingkan. Hijau = lebih baik.
+        </p>
+        <div class="compare-grid">
+          <div class="compare-col" id="compareCol1"></div>
+          <div class="compare-col" id="compareCol2"></div>
+        </div>
+      </section>
+
+      <!-- RIWAYAT -->
+      <section id="historySection" style="display:none; margin-top:2rem;">
+        <div class="history-title-row">
+          <p class="section-label" style="margin:0;">📋 Riwayat Analisis</p>
+          <div class="history-actions">
+            <button class="btn-export" onclick="exportJSON()" title="Export JSON">JSON</button>
+            <button class="btn-export" onclick="exportCSV()" title="Export CSV">CSV</button>
+            <button class="btn-clear-history" onclick="clearHistory()">Hapus Semua</button>
+          </div>
+        </div>
+        <p id="historyCount" style="font-size:.75rem; color:var(--text-muted); font-family:'DM Mono',monospace; margin-bottom:.5rem;"></p>
+        <p id="historyEmpty" style="display:none; color:var(--text-muted); font-size:.9rem; text-align:center; padding:2rem 0;">
+          🍉 Belum ada riwayat.<br><small>Mulai analisis semangka pertamamu!</small>
+        </p>
+        <div id="historyList"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
