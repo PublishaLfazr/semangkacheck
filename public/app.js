@@ -198,8 +198,13 @@ btnAnalyze.addEventListener('click', async () => {
     }
 
     if (!json.data.adalah_tanaman_semangka) {
-      showError('Gambar ini tampaknya bukan bagian dari tanaman semangka. Silakan upload foto buah, daun, akar, batang, bunga, atau bagian lain tanaman semangka.');
-      return;
+      // Jika AI ragu tapi jenis_objek terdeteksi, tetap lanjutkan dengan peringatan
+      if (json.data.jenis_objek && json.data.jenis_objek !== 'lainnya') {
+        json.data._peringatan = 'AI kurang yakin ini tanaman semangka, tapi tetap dianalisis.';
+      } else {
+        showError('Gambar ini tampaknya bukan bagian dari tanaman semangka. Silakan upload foto buah, daun, akar, batang, bunga, atau bagian lain tanaman semangka.');
+        return;
+      }
     }
 
     lastAnalysisData = json.data;
@@ -224,6 +229,15 @@ function showError(msg) {
 
 function showResults(r) {
   results.style.display = 'block';
+
+  // ── PERINGATAN (kalau AI kurang yakin) ────────────────────────────────────
+  const warningBox = document.getElementById('warningBox');
+  if (r._peringatan && warningBox) {
+    warningBox.textContent = '⚠️ ' + r._peringatan;
+    warningBox.style.display = 'block';
+  } else if (warningBox) {
+    warningBox.style.display = 'none';
+  }
 
   const jenis   = r.jenis_objek || 'lainnya';
   const emoji   = JENIS_EMOJI[jenis] || '🔍';
