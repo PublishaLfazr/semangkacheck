@@ -4,39 +4,55 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SemangkaCheck AI</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍉</text></svg>" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>" />
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" />
   <link rel="manifest" href="/manifest.json" />
-  <meta name="theme-color" content="#D63031" />
+  <meta name="theme-color" content="#1D9E75" />
 </head>
 <body>
   <div class="app">
     <header class="header">
-      <div class="logo-circle">🍉</div>
+      <div class="logo-circle">🌿</div>
       <div class="header-text">
         <h1>SemangkaCheck AI</h1>
-        <p>Deteksi kematangan, kesegaran &amp; kemanisan semangka</p>
+        <p>Analisis lengkap tanaman semangka — buah, daun, akar & lebih</p>
       </div>
       <div class="badge-free">GRATIS</div>
     </header>
 
     <main class="main">
-      <!-- TIPS PILIH SEMANGKA -->
+
+      <!-- BAGIAN TANAMAN PILLS -->
+      <div class="plant-parts-banner">
+        <p class="parts-title">🌱 Bagian yang dapat dianalisis:</p>
+        <div class="parts-pills">
+          <span class="part-pill">🍉 Buah</span>
+          <span class="part-pill">🌿 Daun</span>
+          <span class="part-pill">🌱 Akar</span>
+          <span class="part-pill">🪵 Batang</span>
+          <span class="part-pill">🌸 Bunga</span>
+          <span class="part-pill">🌀 Sulur</span>
+          <span class="part-pill">🫘 Benih</span>
+        </div>
+      </div>
+
+      <!-- TIPS -->
       <div class="tips-banner" id="tipsBanner">
         <div class="tips-banner-header" onclick="toggleTips()">
-          <span>💡 Tips Memilih Semangka Segar</span>
+          <span>💡 Tips Foto untuk Hasil Terbaik</span>
           <span class="tips-toggle-icon" id="tipsIcon">▸</span>
         </div>
         <div class="tips-content" id="tipsContent" style="display:none;">
           <ul>
-            <li>🟢 Kulit hijau tua dengan garis putih kontras = tanda matang</li>
-            <li>🟡 Ada bercak kuning di bagian bawah = matang di pohon</li>
-            <li>🔊 Suara "tuk tuk" saat diketuk = berair dan segar</li>
-            <li>⚖️ Pilih yang berat untuk ukurannya = kandungan air tinggi</li>
-            <li>🔵 Tangkai kering dan mengkerut = dipetik saat matang</li>
+            <li>📷 Foto objek dari jarak dekat dengan pencahayaan cukup</li>
+            <li>🍉 <b>Buah:</b> Foto bagian luar atau irisan daging buah</li>
+            <li>🌿 <b>Daun:</b> Tampilkan seluruh permukaan daun dengan jelas</li>
+            <li>🌱 <b>Akar:</b> Bersihkan dari tanah agar terlihat warna aslinya</li>
+            <li>🪵 <b>Batang:</b> Foto bagian yang ingin diperiksa kondisinya</li>
+            <li>🌸 <b>Bunga:</b> Foto saat mekar untuk identifikasi terbaik</li>
           </ul>
         </div>
       </div>
@@ -45,12 +61,13 @@
       <div class="upload-zone" id="uploadZone">
         <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" />
         <div class="upload-icon">📷</div>
-        <h2>Upload atau ambil foto semangka</h2>
-        <p>JPG, PNG, WEBP · maks 10MB</p>
+        <h2>Upload foto bagian tanaman semangka</h2>
+        <p>Buah · Daun · Akar · Batang · Bunga · Sulur · Benih</p>
+        <p style="font-size:0.75rem; margin-top:4px; opacity:0.7;">JPG, PNG, WEBP · maks 10MB</p>
       </div>
 
       <div class="preview-box" id="previewBox">
-        <img id="previewImg" src="" alt="Preview semangka" />
+        <img id="previewImg" src="" alt="Preview" />
         <span class="preview-label">Gambar terpilih</span>
       </div>
 
@@ -70,65 +87,134 @@
       </div>
 
       <button class="btn-analyze" id="btnAnalyze" disabled>
-        <i class="ti ti-scan" aria-hidden="true"></i>
-        Analisis Semangka
+        <i class="ti ti-plant" aria-hidden="true"></i>
+        Analisis Tanaman
       </button>
 
       <!-- HASIL -->
       <section class="results" id="results" aria-live="polite">
         <p class="section-label">Hasil Analisis</p>
 
-        <div class="result-grid">
-          <div class="result-card">
-            <div class="label">Tingkat Kematangan</div>
-            <div class="value" id="ripePct">—</div>
-            <div class="sublabel">
-              <span class="ripeness-badge" id="ripeLabel">—</span>
+        <div class="object-type-row" id="objectTypeRow">
+          <span class="object-type-badge" id="objectTypeBadge">—</span>
+          <span class="condition-badge" id="conditionBadge">—</span>
+        </div>
+
+        <div class="health-score-card" id="healthScoreCard">
+          <div class="health-score-icon" id="healthScoreIcon">🌿</div>
+          <div class="health-score-body">
+            <div class="health-score-label">Skor Kesehatan</div>
+            <div class="health-score-value" id="healthScoreValue">—</div>
+          </div>
+          <div class="health-score-bar-wrap">
+            <div class="meter-bg">
+              <div class="meter-fill fill-health" id="meterHealth"></div>
+            </div>
+            <span class="meter-pct" id="meterHealthPct">0%</span>
+          </div>
+        </div>
+
+        <div id="sectionBuah" style="display:none;">
+          <div class="result-grid">
+            <div class="result-card">
+              <div class="label">Tingkat Kematangan</div>
+              <div class="value" id="ripePct">—</div>
+              <div class="sublabel">
+                <span class="ripeness-badge" id="ripeLabel">—</span>
+              </div>
+            </div>
+            <div class="result-card">
+              <div class="label">Tingkat Kebusukan</div>
+              <div class="value" id="rotPct">—</div>
+              <div class="sublabel" id="rotLabel">—</div>
             </div>
           </div>
-          <div class="result-card">
-            <div class="label">Tingkat Kebusukan</div>
-            <div class="value" id="rotPct">—</div>
-            <div class="sublabel" id="rotLabel">—</div>
+          <div class="result-grid result-grid-extra">
+            <div class="result-card result-card-sweet">
+              <div class="label">🍬 Estimasi Kemanisan</div>
+              <div class="value-sweet" id="sweetnessVal">—</div>
+            </div>
+            <div class="result-card result-card-color">
+              <div class="label">🎨 Skor Warna</div>
+              <div class="value" id="colorScore">—</div>
+            </div>
+          </div>
+          <p class="section-label">Distribusi Persentase</p>
+          <div class="meter-row">
+            <div class="meter-header">
+              <span class="meter-name">Kematangan</span>
+              <span class="meter-pct" id="meterRipePct">0%</span>
+            </div>
+            <div class="meter-bg"><div class="meter-fill fill-matang" id="meterRipe"></div></div>
+          </div>
+          <div class="meter-row">
+            <div class="meter-header">
+              <span class="meter-name">Kebusukan</span>
+              <span class="meter-pct" id="meterRotPct">0%</span>
+            </div>
+            <div class="meter-bg"><div class="meter-fill fill-busuk" id="meterRot"></div></div>
+          </div>
+          <div class="meter-row">
+            <div class="meter-header">
+              <span class="meter-name">Skor Warna</span>
+              <span class="meter-pct" id="meterColorPct">0%</span>
+            </div>
+            <div class="meter-bg"><div class="meter-fill fill-warna" id="meterColor"></div></div>
           </div>
         </div>
 
-        <!-- KARTU FITUR BARU: KEMANISAN & WARNA -->
-        <div class="result-grid result-grid-extra">
-          <div class="result-card result-card-sweet">
-            <div class="label">🍬 Estimasi Kemanisan</div>
-            <div class="value-sweet" id="sweetnessVal">—</div>
+        <div id="sectionTanaman" style="display:none;">
+          <div class="plant-detail-grid">
+            <div class="plant-detail-card">
+              <div class="plant-detail-icon">🎨</div>
+              <div class="plant-detail-label">Warna</div>
+              <div class="plant-detail-value" id="warnaValue">—</div>
+            </div>
+            <div class="plant-detail-card">
+              <div class="plant-detail-icon">🩺</div>
+              <div class="plant-detail-label">Kondisi</div>
+              <div class="plant-detail-value" id="kondisiTanamanValue">—</div>
+            </div>
           </div>
-          <div class="result-card result-card-color">
-            <div class="label">🎨 Skor Warna</div>
-            <div class="value" id="colorScore">—</div>
-          </div>
-        </div>
 
-        <p class="section-label">Distribusi Persentase</p>
-
-        <div class="meter-row">
-          <div class="meter-header">
-            <span class="meter-name">Kematangan</span>
-            <span class="meter-pct" id="meterRipePct">0%</span>
+          <div class="disease-row" id="diseaseRow">
+            <div class="disease-card" id="penyakitCard">
+              <span class="disease-icon">🦠</span>
+              <div>
+                <div class="disease-label">Penyakit Terdeteksi</div>
+                <div class="disease-value" id="penyakitValue">—</div>
+              </div>
+            </div>
+            <div class="disease-card" id="hamaCard">
+              <span class="disease-icon">🐛</span>
+              <div>
+                <div class="disease-label">Serangan Hama</div>
+                <div class="disease-value" id="hamaValue">—</div>
+              </div>
+            </div>
           </div>
-          <div class="meter-bg"><div class="meter-fill fill-matang" id="meterRipe"></div></div>
-        </div>
 
-        <div class="meter-row">
-          <div class="meter-header">
-            <span class="meter-name">Kebusukan</span>
-            <span class="meter-pct" id="meterRotPct">0%</span>
+          <div class="water-stress-row" id="waterStressRow" style="display:none;">
+            <div class="water-stress-card">
+              <span class="water-icon">💧</span>
+              <div>
+                <div class="water-label">Stres Air</div>
+                <div class="water-value" id="stresAirValue">—</div>
+              </div>
+            </div>
           </div>
-          <div class="meter-bg"><div class="meter-fill fill-busuk" id="meterRot"></div></div>
-        </div>
 
-        <div class="meter-row">
-          <div class="meter-header">
-            <span class="meter-name">Skor Warna</span>
-            <span class="meter-pct" id="meterColorPct">0%</span>
+          <!-- INFO PENYAKIT BOX (muncul otomatis kalau ada penyakit/hama) -->
+          <div id="infoBox" style="display:none;" class="info-penyakit-box">
+            <div class="info-header">
+              <span class="info-icon">🔬</span>
+              <span class="info-title" id="infoTitle">Info Penyakit</span>
+              <button class="info-close" onclick="closeInfoBox()">✕</button>
+            </div>
+            <div id="infoContent" class="info-content">
+              <div class="info-loading">⏳ Mencari informasi...</div>
+            </div>
           </div>
-          <div class="meter-bg"><div class="meter-fill fill-warna" id="meterColor"></div></div>
         </div>
 
         <div class="meter-row">
@@ -142,7 +228,7 @@
         <div class="analysis-box">
           <div class="ai-label">
             <div class="ai-dot"></div>
-            Analisis Dari Kami
+            Analisis AI
           </div>
           <p id="analysisText">—</p>
           <div class="tip-box" id="tipBox">
@@ -150,7 +236,6 @@
           </div>
         </div>
 
-        <!-- Tombol aksi hasil -->
         <div class="result-actions">
           <button class="btn-share" id="btnShare">
             <i class="ti ti-share" aria-hidden="true"></i>
@@ -163,10 +248,30 @@
         </div>
       </section>
 
+      <!-- DIAGNOSA KESELURUHAN -->
+      <section id="diagnosaSection" style="display:none; margin-top:2rem;">
+        <div class="diagnosa-header-row">
+          <p class="section-label" style="margin:0;">🩺 Diagnosa Keseluruhan Tanaman</p>
+          <button class="btn-diagnosa" id="btnDiagnosa" onclick="jalankanDiagnosa()">
+            <i class="ti ti-stethoscope"></i> Diagnosa Sekarang
+          </button>
+        </div>
+        <p class="diagnosa-desc">
+          Kumpulkan analisis dari beberapa bagian tanaman (daun, akar, batang, dll), lalu klik Diagnosa Sekarang untuk mendapatkan kesimpulan penyakit menyeluruh.
+        </p>
+        <div id="diagnosaLoading" style="display:none;" class="diagnosa-loading">
+          <div class="loading-bar"><div class="loading-bar-fill"></div></div>
+          <p>🔍 AI sedang menganalisis semua data...</p>
+        </div>
+        <div id="diagnosaResult" style="display:none;" class="diagnosa-result-box">
+          <!-- filled by JS -->
+        </div>
+      </section>
+
       <!-- COMPARE -->
       <section id="compareSection" style="display:none; margin-top:2rem;">
         <div class="compare-title-row">
-          <p class="section-label" style="margin:0;">⚖️ Bandingkan Semangka</p>
+          <p class="section-label" style="margin:0;">⚖️ Bandingkan Analisis</p>
           <button class="btn-clear-history" onclick="closeCompare()">Tutup</button>
         </div>
         <p style="font-size:.8rem; color:var(--text-muted); margin-bottom:.75rem;">
@@ -175,6 +280,30 @@
         <div class="compare-grid">
           <div class="compare-col" id="compareCol1"></div>
           <div class="compare-col" id="compareCol2"></div>
+        </div>
+      </section>
+
+      <!-- ENSIKLOPEDIA PENYAKIT -->
+      <section id="ensiklopediaSection" style="margin-top:2rem;">
+        <div class="ensik-header-row">
+          <p class="section-label" style="margin:0;">📚 Ensiklopedia Penyakit Semangka</p>
+          <div class="ensik-filter-wrap">
+            <button class="ensik-filter active" onclick="filterEnsik('semua',this)">Semua</button>
+            <button class="ensik-filter" onclick="filterEnsik('jamur',this)">🍄 Jamur</button>
+            <button class="ensik-filter" onclick="filterEnsik('bakteri',this)">🦠 Bakteri</button>
+            <button class="ensik-filter" onclick="filterEnsik('virus',this)">🔴 Virus</button>
+            <button class="ensik-filter" onclick="filterEnsik('hama',this)">🐛 Hama</button>
+          </div>
+        </div>
+        <p style="font-size:.8rem;color:var(--text-muted);margin-bottom:.75rem;">Klik kartu untuk melihat detail lengkap gejala, penanganan & pencegahan.</p>
+        <div class="ensik-grid" id="ensikGrid"></div>
+
+        <!-- MODAL DETAIL PENYAKIT -->
+        <div id="ensikModal" class="ensik-modal" style="display:none;" onclick="tutupModal(event)">
+          <div class="ensik-modal-box">
+            <button class="ensik-modal-close" onclick="tutupModalBtn()">✕</button>
+            <div id="ensikModalContent"></div>
+          </div>
         </div>
       </section>
 
@@ -189,13 +318,6 @@
           </div>
         </div>
         <p id="historyCount" style="font-size:.75rem; color:var(--text-muted); font-family:'DM Mono',monospace; margin-bottom:.5rem;"></p>
-        <p id="historyEmpty" style="display:none; color:var(--text-muted); font-size:.9rem; text-align:center; padding:2rem 0;">
-          🍉 Belum ada riwayat.<br><small>Mulai analisis semangka pertamamu!</small>
-        </p>
-        <div id="historyList"></div>
-      </section>
-    </main>
-  </div>
 
   <script src="app.js"></script>
 </body>
