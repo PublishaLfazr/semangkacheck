@@ -74,6 +74,8 @@ app.post('/api/analyze', rateLimit, (req, res, next) => {
 Analisis gambar ini secara menyeluruh. Gambar mungkin berupa BAGIAN MANAPUN dari tanaman semangka:
 buah, daun, akar, batang, bunga, sulur/ranke, benih, atau keseluruhan tanaman.
 
+PENTING: Buah semangka yang busuk, berjamur, berpenyakit parah, atau kondisi sangat buruk TETAP dianggap semangka (adalah_tanaman_semangka: true). Jangan tolak hanya karena kondisinya jelek. Set false HANYA jika gambar benar-benar bukan tanaman semangka sama sekali (misal: foto orang, mobil, hewan, dll).
+
 Berikan hasil HANYA dalam format JSON berikut (tanpa markdown, tanpa kode blok, murni JSON):
 
 {
