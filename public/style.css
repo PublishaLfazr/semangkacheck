@@ -68,7 +68,7 @@ body {
   background: var(--bg);
   z-index: 10;
   /* Subtle watermelon stripe top accent */
-  box-shadow: inset 0 -2px 0 0 var(--primary-light);
+  box-shadow: inset 0 -2px 0 0 var(--green-light);
 }
 
 .logo-circle {
@@ -776,4 +776,544 @@ body {
   color: var(--text-muted);
   font-size: 13px;
   line-height: 1.6;
+}
+
+/* ─── PLANT PARTS BANNER ────────────────────────────────────────────────────── */
+
+.plant-parts-banner {
+  margin: 1rem 1.5rem 0;
+  padding: .75rem 1rem;
+  background: var(--green-light);
+  border-radius: var(--radius);
+  border: 1px solid rgba(29,158,117,0.2);
+}
+
+.parts-title {
+  font-size: .75rem;
+  font-family: 'DM Mono', monospace;
+  color: var(--green-dark);
+  margin-bottom: .5rem;
+  font-weight: 500;
+}
+
+.parts-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem;
+}
+
+.part-pill {
+  font-size: .72rem;
+  padding: .2rem .55rem;
+  background: var(--bg);
+  border: 1px solid rgba(29,158,117,0.3);
+  border-radius: 999px;
+  color: var(--green-dark);
+  font-family: 'DM Mono', monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  .plant-parts-banner { background: rgba(29,158,117,0.12); }
+  .part-pill { background: rgba(29,158,117,0.1); color: var(--green-dark); }
+}
+
+/* ─── OBJECT TYPE BADGE ROW ─────────────────────────────────────────────────── */
+
+.object-type-row {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+  margin-bottom: .75rem;
+}
+
+.object-type-badge {
+  font-size: .85rem;
+  font-weight: 700;
+  padding: .3rem .8rem;
+  border-radius: 999px;
+  background: var(--green-light);
+  color: var(--green-dark);
+  border: 1.5px solid rgba(29,158,117,0.25);
+}
+
+.jenis-buah    { background: #FDECEA; color: #6B0000; border-color: rgba(214,48,49,0.3); }
+.jenis-daun    { background: #E1F5EE; color: #085041; border-color: rgba(29,158,117,0.3); }
+.jenis-akar    { background: #fff3e0; color: #7a4100; border-color: rgba(200,100,0,0.3); }
+.jenis-batang  { background: #f3ede3; color: #4a3120; border-color: rgba(120,80,40,0.3); }
+.jenis-bunga   { background: #fce4ec; color: #880e4f; border-color: rgba(200,50,100,0.3); }
+.jenis-sulur   { background: #e8f5e9; color: #1b5e20; border-color: rgba(50,150,50,0.3); }
+.jenis-benih   { background: #fffde7; color: #5d4e00; border-color: rgba(200,180,0,0.3); }
+.jenis-tanaman_utuh { background: #e8f5e9; color: #1b5e20; border-color: rgba(50,150,50,0.3); }
+
+@media (prefers-color-scheme: dark) {
+  .jenis-buah    { background: rgba(214,48,49,0.15);  color: #f09090; }
+  .jenis-daun    { background: rgba(29,158,117,0.15); color: #5ad4a5; }
+  .jenis-akar    { background: rgba(200,100,0,0.15);  color: #e8a060; }
+  .jenis-batang  { background: rgba(120,80,40,0.15);  color: #c49a6c; }
+  .jenis-bunga   { background: rgba(200,50,100,0.15); color: #f48fb1; }
+  .jenis-sulur   { background: rgba(50,150,50,0.15);  color: #81c784; }
+  .jenis-benih   { background: rgba(200,180,0,0.15);  color: #fff176; }
+  .jenis-tanaman_utuh { background: rgba(50,150,50,0.15); color: #81c784; }
+}
+
+/* ─── CONDITION BADGE ────────────────────────────────────────────────────────── */
+
+.condition-badge {
+  font-size: .8rem;
+  font-weight: 600;
+  padding: .3rem .75rem;
+  border-radius: 999px;
+  font-family: 'DM Mono', monospace;
+}
+
+.kondisi-sangat-baik { background: #c8e6c9; color: #1b5e20; }
+.kondisi-baik        { background: #dcedc8; color: #33691e; }
+.kondisi-cukup       { background: #fff9c4; color: #f57f17; }
+.kondisi-buruk       { background: #ffe0b2; color: #e65100; }
+.kondisi-sangat-buruk { background: #ffcdd2; color: #b71c1c; }
+
+@media (prefers-color-scheme: dark) {
+  .kondisi-sangat-baik { background: rgba(46,125,50,0.3);  color: #a5d6a7; }
+  .kondisi-baik        { background: rgba(85,139,47,0.3);  color: #c5e1a5; }
+  .kondisi-cukup       { background: rgba(249,168,37,0.3); color: #fff59d; }
+  .kondisi-buruk       { background: rgba(230,81,0,0.3);   color: #ffcc80; }
+  .kondisi-sangat-buruk { background: rgba(183,28,28,0.3); color: #ef9a9a; }
+}
+
+/* ─── HEALTH SCORE CARD ──────────────────────────────────────────────────────── */
+
+.health-score-card {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: .75rem 1rem;
+  margin-bottom: .75rem;
+}
+
+.health-score-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.health-score-body {
+  flex: 0 0 auto;
+}
+
+.health-score-label {
+  font-size: .72rem;
+  color: var(--text-muted);
+  font-family: 'DM Mono', monospace;
+}
+
+.health-score-value {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--green-dark);
+}
+
+@media (prefers-color-scheme: dark) {
+  .health-score-value { color: var(--green-dark); }
+}
+
+.health-score-bar-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+}
+
+.fill-health {
+  background: linear-gradient(90deg, #43a047, #1D9E75);
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.7s cubic-bezier(.4,0,.2,1);
+}
+
+/* ─── PLANT DETAIL GRID ──────────────────────────────────────────────────────── */
+
+.plant-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .6rem;
+  margin-bottom: .75rem;
+}
+
+.plant-detail-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: .75rem;
+  text-align: center;
+}
+
+.plant-detail-icon { font-size: 1.5rem; margin-bottom: .25rem; }
+.plant-detail-label {
+  font-size: .68rem;
+  color: var(--text-muted);
+  font-family: 'DM Mono', monospace;
+  margin-bottom: .2rem;
+}
+.plant-detail-value {
+  font-size: .9rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.ktanaman-sehat   { color: #1b5e20; }
+.ktanaman-kurang  { color: #e65100; }
+.ktanaman-sakit   { color: #b71c1c; }
+.ktanaman-kritis  { color: #880e4f; }
+
+@media (prefers-color-scheme: dark) {
+  .ktanaman-sehat  { color: #a5d6a7; }
+  .ktanaman-kurang { color: #ffcc80; }
+  .ktanaman-sakit  { color: #ef9a9a; }
+  .ktanaman-kritis { color: #f48fb1; }
+}
+
+/* ─── DISEASE / PEST CARDS ───────────────────────────────────────────────────── */
+
+.disease-row {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  margin-bottom: .75rem;
+}
+
+.disease-card {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: .65rem .9rem;
+}
+
+.disease-card.disease-detected {
+  border-color: rgba(214,48,49,0.4);
+  background: rgba(214,48,49,0.05);
+}
+
+.disease-icon { font-size: 1.4rem; flex-shrink: 0; }
+.disease-label {
+  font-size: .68rem;
+  color: var(--text-muted);
+  font-family: 'DM Mono', monospace;
+}
+.disease-value {
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.disease-detected .disease-value { color: #b71c1c; }
+
+@media (prefers-color-scheme: dark) {
+  .disease-detected { background: rgba(214,48,49,0.1); }
+  .disease-detected .disease-value { color: #ef9a9a; }
+}
+
+/* ─── WATER STRESS ───────────────────────────────────────────────────────────── */
+
+.water-stress-row { margin-bottom: .75rem; }
+
+.water-stress-card {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  background: #e3f2fd;
+  border: 1px solid rgba(30,136,229,0.3);
+  border-radius: var(--radius);
+  padding: .65rem .9rem;
+}
+
+.water-stress-card.water-stress-abnormal {
+  background: #fff3e0;
+  border-color: rgba(230,81,0,0.3);
+}
+
+.water-icon { font-size: 1.4rem; flex-shrink: 0; }
+.water-label {
+  font-size: .68rem;
+  color: var(--text-muted);
+  font-family: 'DM Mono', monospace;
+}
+.water-value { font-size: .85rem; font-weight: 600; color: #0d47a1; }
+.water-stress-abnormal .water-value { color: #e65100; }
+
+@media (prefers-color-scheme: dark) {
+  .water-stress-card          { background: rgba(30,136,229,0.1); }
+  .water-stress-card.water-stress-abnormal { background: rgba(230,81,0,0.1); }
+  .water-value                { color: #90caf9; }
+  .water-stress-abnormal .water-value { color: #ffcc80; }
+}
+
+/* ─── INFO PENYAKIT BOX ──────────────────────────────────────────────────── */
+.info-penyakit-box {
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.info-header {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  margin-bottom: .75rem;
+}
+
+.info-icon { font-size: 1.1rem; }
+
+.info-title {
+  flex: 1;
+  font-weight: 700;
+  font-size: .9rem;
+  color: var(--text);
+}
+
+.info-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 1rem;
+  padding: 0 .25rem;
+  line-height: 1;
+}
+
+.info-loading {
+  color: var(--text-muted);
+  font-size: .85rem;
+  padding: .5rem 0;
+}
+
+.info-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: .5rem;
+}
+
+.info-nama {
+  font-weight: 700;
+  font-size: .95rem;
+  color: var(--text);
+}
+
+.info-bahaya {
+  font-size: .8rem;
+  font-weight: 700;
+  font-family: 'DM Mono', monospace;
+}
+
+.info-deskripsi {
+  font-size: .85rem;
+  color: var(--text);
+  line-height: 1.5;
+  margin: 0 0 .75rem;
+}
+
+.info-section {
+  font-size: .82rem;
+  color: var(--text);
+  margin-bottom: .6rem;
+  line-height: 1.5;
+}
+
+.info-section ul,
+.info-section ol {
+  margin: .35rem 0 0 1.1rem;
+  padding: 0;
+}
+
+.info-section li {
+  margin-bottom: .2rem;
+}
+
+.info-sumber {
+  color: var(--text-muted);
+  font-style: italic;
+  border-top: 1px solid var(--border);
+  padding-top: .5rem;
+  margin-top: .5rem;
+}
+
+/* ─── DIAGNOSA SECTION ────────────────────────────────────────────────────── */
+.diagnosa-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: .5rem;
+}
+
+.diagnosa-desc {
+  font-size: .82rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.btn-diagnosa {
+  background: linear-gradient(135deg, #1D9E75, #15735a);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  padding: .5rem 1rem;
+  font-size: .85rem;
+  font-weight: 700;
+  font-family: 'Syne', sans-serif;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  transition: opacity .2s;
+}
+
+.btn-diagnosa:hover { opacity: .85; }
+.btn-diagnosa:disabled { opacity: .5; cursor: not-allowed; }
+
+.diagnosa-loading {
+  text-align: center;
+  padding: 1rem 0;
+  color: var(--text-muted);
+  font-size: .85rem;
+}
+
+.diagnosa-result-box {
+  background: var(--card-bg);
+  border: 1.5px solid var(--primary);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+
+.diagnosa-meta-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .75rem;
+  margin-bottom: 1rem;
+}
+
+.diagnosa-meta-item {
+  background: var(--bg);
+  border-radius: calc(var(--radius) - 2px);
+  padding: .6rem .75rem;
+  text-align: center;
+}
+
+.diagnosa-meta-label {
+  font-size: .7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  margin-bottom: .2rem;
+}
+
+.diagnosa-meta-val {
+  font-size: .85rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.diagnosa-penyakit {
+  color: var(--primary) !important;
+}
+
+.diagnosa-skor-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: .82rem;
+  margin-bottom: .35rem;
+}
+
+.diagnosa-skor-label { color: var(--text-muted); }
+.diagnosa-skor-val   { font-weight: 700; color: var(--text); font-family: 'DM Mono', monospace; }
+
+.diagnosa-alert {
+  background: #fff3cd;
+  border: 1px solid #e6aa00;
+  border-radius: 6px;
+  padding: .5rem .75rem;
+  font-size: .83rem;
+  color: #7a5200;
+  margin-bottom: .75rem;
+}
+
+.diagnosa-penyebab {
+  font-size: .85rem;
+  color: var(--text);
+  margin-bottom: .75rem;
+  line-height: 1.5;
+}
+
+.diagnosa-section {
+  font-size: .83rem;
+  color: var(--text);
+  margin-bottom: .75rem;
+  line-height: 1.5;
+}
+
+.diagnosa-section ul,
+.diagnosa-section ol {
+  margin: .35rem 0 0 1.1rem;
+  padding: 0;
+}
+
+.diagnosa-section li { margin-bottom: .25rem; }
+
+.diagnosa-ringkasan {
+  background: var(--bg);
+  border-radius: calc(var(--radius) - 2px);
+  padding: .75rem;
+  margin-top: .75rem;
+  font-size: .85rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+/* ─── INFO DB BADGE & PRODUK TAGS ─────────────────────────────────────────── */
+.info-db-badge {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  flex-wrap: wrap;
+  margin-bottom: .6rem;
+}
+
+.info-db-source {
+  font-size: .72rem;
+  font-weight: 700;
+  font-family: 'DM Mono', monospace;
+  background: var(--primary-bg, #e6f7f1);
+  color: var(--primary, #1D9E75);
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+.info-produk {
+  margin-top: .75rem;
+  padding-top: .6rem;
+  border-top: 1px solid var(--border);
+}
+
+.produk-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  margin-top: .35rem;
+}
+
+.produk-tag {
+  font-size: .75rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 3px 10px;
+  color: var(--text);
+  font-family: 'DM Mono', monospace;
 }
